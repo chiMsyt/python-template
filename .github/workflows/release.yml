@@ -15,7 +15,7 @@ concurrency:
   cancel-in-progress: false # never cancel a release halfway through publishing
 
 env:
-  UV_VERSION: "0.12.6"
+  UV_VERSION: "0.13.7"
   UV_LOCKED: "1"
 
 defaults:

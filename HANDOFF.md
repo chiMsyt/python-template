@@ -1,10 +1,28 @@
 # HANDOFF: python-template
 
-**Next action (chiMsyt):** apply the repository settings, all free on public repositories:
-a ruleset on `main` requiring `ci-ok` with force pushes and deletion blocked; Dependabot
-alerts and security updates; private vulnerability reporting; CodeQL default setup. Then
-merge Dependabot PR #1 (`uv-build` 0.13) together with raising `UV_VERSION` in the workflows
-to a 0.13 release. Done = settings applied and PR #1 merged with CI green.
+**Next action (chiMsyt):** push branch `deps/uv-0.13` (needs Tim's OK), then close PR #1 as
+superseded or merge it. Done = `ci` green on the branch's PR, run under uv 0.13.7, and PR #1
+closed or merged.
+
+**Still open after that:** the repository settings, all free on public repositories: a ruleset
+on `main` requiring `ci-ok` with force pushes and deletion blocked; Dependabot alerts and
+security updates; private vulnerability reporting; CodeQL default setup.
+
+## uv 0.13 branch (`deps/uv-0.13`, local only, not pushed), 2026-11-18
+
+- `uv_build` raised to `>=0.13.7,<0.14.0` (the same edit as PR #1) and `UV_VERSION` raised to
+  `0.13.7` in `ci.yml`, `bench.yml` and `release.yml`. No other uv pins exist in the repo.
+- Why 0.13.7 and not the newest 0.13.9: the repository's own Dependabot policy is a 7-day
+  cooldown on new releases. 0.13.9 (2026-11-17) and 0.13.8 (2026-11-12) are inside it; 0.13.7
+  (2026-11-03) is the newest outside it, and it is the floor Dependabot chose for `uv_build`.
+  0.13.9 also changes how `uv.lock` writes environment markers, which could trip
+  `UV_LOCKED=1`. Raise it once the cooldown has passed, through the next Dependabot PR.
+- **Verified locally, with uv 0.12.6** (`UV_LOCKED=1`): every command the `ci` jobs run, plus
+  the benchmarks, passes. `uv build` fetched the `uv_build` backend in range (0.13.9 at the
+  time), so the 0.13 backend itself built and installed the wheel.
+- **Not verified:** any command under uv 0.13.7 itself. The local uv was installed with
+  winget, so `uv self update` refuses, and fetching uv 0.13.7 another way was not allowed. CI
+  on the pushed branch is the first run under 0.13.7, including the preview `uv audit`.
 
 ## State, 2026-11-18
 
@@ -36,6 +54,8 @@ the 90% coverage floor; the weekly Monday 01:30 UTC scheduled run.
 
 ## Changelog
 
+- 2026-11-18: branch `deps/uv-0.13` (local): `uv_build` and the workflow `UV_VERSION`
+  raised to 0.13.7 together, pairing Dependabot PR #1.
 - 2026-11-18: published at github.com/chiMsyt/python-template (public, template
   repository); first `ci` run green.
 - 2026-11-18: commit history rewritten to the owner's GitHub no-reply address before the

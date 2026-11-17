@@ -18,7 +18,7 @@ concurrency:
   cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 
 env:
-  UV_VERSION: "0.12.6" # pinned: uv audit is a preview feature and must not change under us
+  UV_VERSION: "0.13.7" # pinned: uv audit is a preview feature and must not change under us
   UV_LOCKED: "1" # every uv sync and uv run must match uv.lock exactly
 
 defaults:
