@@ -133,6 +133,7 @@ jobs:
         run: |
           uv run --group ci check-jsonschema --schemafile .github/portfolio.schema.json portfolio.yml
           uv run --group ci check-jsonschema --builtin-schema vendor.github-workflows .github/workflows/*.yml
+          uv run --group ci check-jsonschema --builtin-schema vendor.dependabot .github/dependabot.yml
       - name: portfolio.yml id matches the repository
         run: bash .github/scripts/check-identity.sh
 
