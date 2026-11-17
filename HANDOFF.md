@@ -31,5 +31,7 @@ the 90% coverage floor; the weekly Monday 01:30 UTC scheduled run.
 
 ## Changelog
 
+- 2026-11-18: changelog generation fixed for two or more releases (sections ran together);
+  verified with markdownlint on single-release, multi-release and release-notes output.
 - 2026-11-18: created. Package, CI, release and dependency automation, advisory benchmarks,
   security policy, issue forms.
