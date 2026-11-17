@@ -1,0 +1,8 @@
+# Store and check out every text file with LF endings, so a Windows editor that
+# writes CRLF produces a normal diff instead of a whole-file rewrite.
+* text=auto eol=lf
+
+*.png binary
+*.jpg binary
+*.ico binary
+*.whl binary
