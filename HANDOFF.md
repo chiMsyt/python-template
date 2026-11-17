@@ -1,9 +1,10 @@
 # HANDOFF: python-template
 
-**Next action (chiMsyt):** once the first `ci` run on GitHub is green, apply the repository
-settings, all free on public repositories: a ruleset on `main` requiring `ci-ok` with force
-pushes and deletion blocked; Dependabot alerts and security updates; private vulnerability
-reporting; CodeQL default setup. Done = all four applied.
+**Next action (chiMsyt):** apply the repository settings, all free on public repositories:
+a ruleset on `main` requiring `ci-ok` with force pushes and deletion blocked; Dependabot
+alerts and security updates; private vulnerability reporting; CodeQL default setup. Then
+merge Dependabot PR #1 (`uv-build` 0.13) together with raising `UV_VERSION` in the workflows
+to a 0.13 release. Done = settings applied and PR #1 merged with CI green.
 
 ## State, 2026-11-18
 
@@ -13,10 +14,13 @@ report nothing; each checker was shown to fail on a deliberately broken input; t
 guard's five cases; the release tag check and git-cliff notes in a tagged throwaway clone; the
 benchmark gate (fails on a +35-70% regression, passes after revert).
 
-**Not verified yet** (needs GitHub): the workflows on GitHub runners, especially the Windows
-and macOS legs; `release.yml` end to end (needs a tag push, creates a public release);
-build-provenance attestation; Dependabot's first PRs; GitHub runner benchmark noise (run
-`bench.yml` five times and apply the Management `bench_spread.py` analysis).
+**Verified on GitHub** (first push, 2026-11-18): `ci` green on all nine jobs, including the
+Windows and macOS legs, each job 8–25 seconds; Dependabot opened PR #1 at once, and `ci` and
+`bench` both ran green on it.
+
+**Not verified yet:** `release.yml` end to end (needs a tag push, which publishes a real
+release); build-provenance attestation; GitHub runner benchmark noise (run `bench.yml` five
+times and apply the Management `bench_spread.py` analysis).
 
 **Defaults the owner may want to change:** the seven-day acknowledgement promise in `SECURITY.md`;
 the 90% coverage floor; the weekly Monday 01:30 UTC scheduled run.
@@ -32,6 +36,8 @@ the 90% coverage floor; the weekly Monday 01:30 UTC scheduled run.
 
 ## Changelog
 
+- 2026-11-18: published at github.com/chiMsyt/python-template (public, template
+  repository); first `ci` run green.
 - 2026-11-18: commit history rewritten to the owner's GitHub no-reply address before the
   first push; content unchanged (identical tree).
 - 2026-11-18: changelog generation fixed for two or more releases (sections ran together);
