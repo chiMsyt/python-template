@@ -1,0 +1,65 @@
+# Advisory benchmarks: never a required check. Shared runners are too noisy to gate merges on
+# wall-clock time; regressions are gated locally against a saved baseline instead.
+# Method and evidence: Management/standards/benchmarking.md.
+name: bench
+
+on:
+  workflow_dispatch:
+  pull_request:
+    paths:
+      - "src/**"
+      - "benchmarks/**"
+      - "pyproject.toml"
+      - "uv.lock"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  UV_VERSION: "0.12.6"
+  UV_LOCKED: "1"
+
+defaults:
+  run:
+    shell: bash
+
+jobs:
+  bench:
+    name: bench
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: astral-sh/setup-uv@68559e99cc807c1eb7e9238fd43a15bba460eec2 # v10.3.3
+        with:
+          version: ${{ env.UV_VERSION }}
+      - name: Run benchmarks (coverage off, it distorts timings)
+        run: >-
+          uv run pytest benchmarks --benchmark-only --no-cov
+          --benchmark-json=benchmark.json --benchmark-columns=min,median,stddev,rounds
+          | tee bench.txt
+      - name: Fail if no benchmark ran
+        run: >-
+          uv run python -c "import json, sys;
+          n = len(json.load(open('benchmark.json'))['benchmarks']);
+          print(n, 'benchmarks'); sys.exit(n == 0)"
+      - name: Summary
+        run: |
+          {
+            echo "### Benchmarks (advisory: one shared-runner run; compare trends, not single runs)"
+            echo '```text'
+            grep -E '^(Name|test_)' bench.txt
+            echo '```'
+          } >> "$GITHUB_STEP_SUMMARY"
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: benchmark
+          path: benchmark.json
+          retention-days: 30
+          if-no-files-found: error

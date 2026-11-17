@@ -41,19 +41,22 @@ select = [
 
 [tool.ruff.lint.per-file-ignores]
 "tests/**" = ["S101"]                   # assert is how pytest checks
+"benchmarks/**" = ["S101"]
 "src/python_template/cli.py" = ["T201"] # a CLI prints by design
 
 [tool.mypy]
 strict = true
-files = ["src", "tests"]
+files = ["src", "tests", "benchmarks"]
 
 [tool.pytest]
 testpaths = ["tests"]
-addopts = ["--cov"]
+python_files = ["test_*.py", "bench_*.py"]
+# --cov takes an optional value: a bare "--cov" here would swallow the first path given on
+# the command line (pytest benchmarks -> --cov=benchmarks), so the package is named explicitly.
+addopts = ["--cov=python_template"]
 strict = true
 
 [tool.coverage.run]
-source_pkgs = ["python_template"]
 branch = true
 
 [tool.coverage.report]
