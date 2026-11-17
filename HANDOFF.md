@@ -1,8 +1,9 @@
 # HANDOFF: python-template
 
-**Next action (Tim):** create `chiMsyt/python-template` on GitHub (public), push `main`,
-tick **Template repository** in Settings, and watch the first `ci` run. Done = `ci-ok` green
-with all eight test/lint/build/audit/config jobs green, and the repo labelled "Template".
+**Next action (chiMsyt):** once the first `ci` run on GitHub is green, apply the repository
+settings, all free on public repositories: a ruleset on `main` requiring `ci-ok` with force
+pushes and deletion blocked; Dependabot alerts and security updates; private vulnerability
+reporting; CodeQL default setup. Done = all four applied.
 
 ## State, 2026-11-18
 
@@ -17,7 +18,7 @@ and macOS legs; `release.yml` end to end (needs a tag push, creates a public rel
 build-provenance attestation; Dependabot's first PRs; GitHub runner benchmark noise (run
 `bench.yml` five times and apply the Management `bench_spread.py` analysis).
 
-**Defaults Tim may want to change:** the seven-day acknowledgement promise in `SECURITY.md`;
+**Defaults the owner may want to change:** the seven-day acknowledgement promise in `SECURITY.md`;
 the 90% coverage floor; the weekly Monday 01:30 UTC scheduled run.
 
 ## Failed approaches
@@ -31,6 +32,8 @@ the 90% coverage floor; the weekly Monday 01:30 UTC scheduled run.
 
 ## Changelog
 
+- 2026-11-18: commit history rewritten to the owner's GitHub no-reply address before the
+  first push; content unchanged (identical tree).
 - 2026-11-18: changelog generation fixed for two or more releases (sections ran together);
   verified with markdownlint on single-release, multi-release and release-notes output.
 - 2026-11-18: created. Package, CI, release and dependency automation, advisory benchmarks,
