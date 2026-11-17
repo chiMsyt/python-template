@@ -1,0 +1,19 @@
+# yaml-language-server: $schema=.github/portfolio.schema.json
+# Portfolio metadata, read by the portfolio website. CI validates it against the schema and
+# checks that `id` matches the repository name. Highlights must be verifiable from this repo.
+schema: "0.1"
+id: python-template
+name: Python project template
+summary: Starting point for new Python projects, with quality gates, CI/CD and benchmarks that already run.
+status: active
+kind: template
+tracks: [developer-tooling, infrastructure]
+stack: [Python, uv, ruff, mypy, pytest, GitHub Actions]
+links:
+  repository: https://github.com/chiMsyt/python-template
+started: "2026-11"
+highlights:
+  - Quality gates use the same locked tool versions locally and in CI
+  - GitHub Actions pinned to commit SHAs, updated by Dependabot after a 7-day cooldown
+  - One aggregate required check (ci-ok) for branch protection
+featured: false
