@@ -1,4 +1,4 @@
-# Weekly dependency updates. Standard: Management/standards/ci-cd.md.
+# Weekly dependency updates: portfolio CI/CD standard v1.0.0.
 # The 7-day cooldown keeps freshly published releases (the window in which a compromised
 # release is usually caught) out of update PRs. Security updates are not delayed by it.
 version: 2

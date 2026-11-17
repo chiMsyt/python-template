@@ -1,4 +1,4 @@
-# Publish a GitHub Release when a version tag is pushed. Standard: Management/standards/ci-cd.md.
+# Publish a GitHub Release when a version tag is pushed: portfolio CI/CD standard v1.0.0.
 # Procedure (README "Release"): bump with `uv version --bump`, regenerate CHANGELOG.md with
 # git-cliff, commit, then tag vX.Y.Z and push the tag. This workflow tests, builds, verifies,
 # attests and publishes; it never builds from a cache.

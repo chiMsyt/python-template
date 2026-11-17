@@ -1,4 +1,4 @@
-# Continuous integration. Standard: Management/standards/ci-cd.md (v1.0.0).
+# Continuous integration: portfolio CI/CD standard v1.0.0.
 # Branch protection needs exactly one required check: "ci-ok".
 name: ci
 
@@ -134,6 +134,8 @@ jobs:
           uv run --group ci check-jsonschema --schemafile .github/portfolio.schema.json portfolio.yml
           uv run --group ci check-jsonschema --builtin-schema vendor.github-workflows .github/workflows/*.yml
           uv run --group ci check-jsonschema --builtin-schema vendor.dependabot .github/dependabot.yml
+          uv run --group ci check-jsonschema --builtin-schema vendor.github-issue-forms .github/ISSUE_TEMPLATE/bug_report.yml .github/ISSUE_TEMPLATE/feature_request.yml
+          uv run --group ci check-jsonschema --builtin-schema vendor.github-issue-config .github/ISSUE_TEMPLATE/config.yml
       - name: portfolio.yml id matches the repository
         run: bash .github/scripts/check-identity.sh
 

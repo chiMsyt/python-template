@@ -1,6 +1,6 @@
 # Advisory benchmarks: never a required check. Shared runners are too noisy to gate merges on
 # wall-clock time; regressions are gated locally against a saved baseline instead.
-# Method and evidence: Management/standards/benchmarking.md.
+# Portfolio benchmarking standard v1.0.0.
 name: bench
 
 on:

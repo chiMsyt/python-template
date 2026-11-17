@@ -2,7 +2,7 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://github.com/chiMsyt/python-template/blob/main/.github/portfolio.schema.json",
   "title": "Portfolio project metadata",
-  "description": "Describes one repository for the portfolio website (format version 0.1). Canonical documentation: Management/standards/project-metadata.md.",
+  "description": "Describes one repository for the portfolio website: portfolio project-metadata format, version 0.1.",
   "type": "object",
   "additionalProperties": false,
   "required": ["schema", "id", "name", "summary", "status", "kind", "tracks", "stack", "links"],
